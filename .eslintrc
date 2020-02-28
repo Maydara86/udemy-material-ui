@@ -1,0 +1,24 @@
+{
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "rules": {
+    "no-console": "warn",
+    "max-len": [
+      "warn",
+      {
+        "code": 90,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 90,
+        "semi": false,
+        "tabWidth": 2
+      }
+    ]
+  }
+}
