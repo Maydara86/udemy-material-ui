@@ -1,9 +1,10 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import makeStyles from '@material-ui/styles/makeStyles'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+
+import logo from '../../assets/logo.svg'
 
 function ElevationScroll(props) {
   const { children } = props
@@ -13,6 +14,7 @@ function ElevationScroll(props) {
   })
 
   return React.cloneElement(children, {
+    // elevation = the shaddow underneath the navbar takes value of 1..20
     elevation: trigger ? 4 : 0,
   })
 }
@@ -20,6 +22,10 @@ function ElevationScroll(props) {
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
+    marginBottom: '3em',
+  },
+  logo: {
+    height: '7em',
   },
 }))
 
@@ -30,8 +36,9 @@ export default function Header() {
     <>
       <ElevationScroll>
         <AppBar position="fixed">
-          <Toolbar>
-            <Typography variant="h3">Arc Development</Typography>
+          {/* disableGutters = remove the side gaps in the toolbar edges */}
+          <Toolbar disableGutters>
+            <img className={classes.logo} alt="Company Logo" src={logo} />
           </Toolbar>
         </AppBar>
       </ElevationScroll>
