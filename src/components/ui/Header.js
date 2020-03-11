@@ -7,6 +7,8 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Button from '@material-ui/core/Button'
 import Link from 'react-router-dom/Link'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 import logo from '../../assets/logo.svg'
 
@@ -57,7 +59,20 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles()
   const [value, setValue] = useState(0)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [open, setOpen] = useState(false)
+
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget)
+    setOpen(true)
+  }
+
+  const handleClose = (e) => {
+    setAnchorEl(null)
+    setOpen(false)
+  }
   const handleChange = (e, value) => setValue(value)
+
   useEffect(() => {
     if (window.location.pathname === '/' && value !== 0) {
       setValue(0)
@@ -101,6 +116,9 @@ export default function Header() {
                 component={Link}
                 to="/services"
                 label="Services"
+                aria-owns={anchorEl ? 'simple-menu' : undefined}
+                aria-haspopup={anchorEl ? true : undefined}
+                onMouseOver={(e) => handleClick(e)}
               />
               <Tab
                 className={classes.tab}
@@ -130,6 +148,17 @@ export default function Header() {
             >
               Free Estimate
             </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{ onMouseLeave: handleClose }}
+            >
+              <MenuItem onClick={handleClose}>Custom Software Development</MenuItem>
+              <MenuItem onClick={handleClose}>Mobile App Development</MenuItem>
+              <MenuItem onClick={handleClose}>Website Development</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
