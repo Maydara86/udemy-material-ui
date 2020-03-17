@@ -11,6 +11,9 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import MenuIcon from '@material-ui/icons/Menu'
+import IconButton from '@material-ui/core/IconButton'
 
 import logo from '../../assets/logo.svg'
 
@@ -80,16 +83,30 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  drawerIcon: {
+    height: '50px',
+    width: '50px',
+  },
+  drawerIconContainer: {
+    marginLeft: 'auto',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }))
 
 export default function Header() {
   const classes = useStyles()
   const theme = useTheme()
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
   const matches = useMediaQuery(theme.breakpoints.down('md'))
+
+  const [openDrawer, setOpenDrawer] = useState(false)
   const [value, setValue] = useState(0)
   const [anchorEl, setAnchorEl] = useState(null)
-  const [open, setOpen] = useState(false)
+  const [openMenu, setOpen] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null)
     setOpen(false)
@@ -112,7 +129,7 @@ export default function Header() {
     setAnchorEl(null)
     setOpen(false)
   }
-  const handleChange = (e, value) => setValue(value)
+  const handleChange = (e, newValue) => setValue(newValue)
 
   useEffect(() => {
     switch (window.location.pathname) {
@@ -219,7 +236,7 @@ export default function Header() {
         id="simple-menu"
         classes={{ paper: classes.menu }}
         anchorEl={anchorEl}
-        open={open}
+        open={openMenu}
         onClose={handleClose}
         MenuListProps={{ onMouseLeave: handleClose }}
         elevation={0}
@@ -244,6 +261,27 @@ export default function Header() {
     </>
   )
 
+  const drawer = (
+    <>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)}
+      >
+        example drawer
+      </SwipeableDrawer>
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+      >
+        <MenuIcon className={classes.drawerIcon} />
+      </IconButton>
+    </>
+  )
+
   return (
     <>
       <ElevationScroll>
@@ -259,7 +297,7 @@ export default function Header() {
             >
               <img className={classes.logo} alt="Company Logo" src={logo} />
             </Button>
-            {matches ? null : tabs}
+            {matches ? drawer : tabs}
           </Toolbar>
         </AppBar>
       </ElevationScroll>
