@@ -96,6 +96,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'transparent',
     },
   },
+  drawer: {
+    backgroundColor: theme.palette.common.blue,
+  },
+  drawerItem: {
+    ...theme.typography.tab,
+    color: 'white',
+  },
+  drawerItemEstimate: {
+    backgroundColor: theme.palette.common.orange,
+  },
 }))
 
 export default function Header() {
@@ -272,8 +282,9 @@ export default function Header() {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
         onOpen={() => setOpenDrawer(true)}
+        classes={{ paper: classes.drawer }}
       >
-        <List disablePadding>
+        <List className={classes.drawerItem} disablePadding>
           <ListItem
             divider
             button
@@ -325,6 +336,7 @@ export default function Header() {
             onClick={() => setOpenDrawer(false)}
             component={Link}
             to="/estimate"
+            className={classes.drawerItemEstimate}
           >
             <ListItemText disableTypography>Free Estimate</ListItemText>
           </ListItem>
