@@ -110,6 +110,9 @@ const useStyles = makeStyles((theme) => ({
   drawerItemSelected: {
     opacity: 1,
   },
+  appbar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 }))
 
 export default function Header() {
@@ -142,10 +145,20 @@ export default function Header() {
   const handleChange = (e, newValue) => setValue(newValue)
 
   const menuOptions = [
-    { name: 'Services', link: '/services' },
-    { name: 'Custom Software Development', link: '/customsoftware' },
-    { name: 'Mobile Apps Development', link: '/mobileapps' },
-    { name: 'Websites Development', link: '/websites' },
+    { name: 'Services', link: '/services', activeIndex: 1, selectedIndex: 0 },
+    {
+      name: 'Custom Software Development',
+      link: '/customsoftware',
+      activeIndex: 1,
+      selectedIndex: 1,
+    },
+    {
+      name: 'Mobile Apps Development',
+      link: '/mobileapps',
+      activeIndex: 1,
+      selectedIndex: 2,
+    },
+    { name: 'Websites Development', link: '/websites', activeIndex: 1, selectedIndex: 3 },
   ]
 
   const routes = [
@@ -213,6 +226,7 @@ export default function Header() {
       </Button>
       <Menu
         id="simple-menu"
+        style={{ zIndex: 1301 }}
         classes={{ paper: classes.menu }}
         anchorEl={anchorEl}
         open={openMenu}
@@ -223,7 +237,7 @@ export default function Header() {
       >
         {menuOptions.map((option, i) => (
           <MenuItem
-            key={option}
+            key={i}
             component={Link}
             to={option.link}
             classes={{ root: classes.menuItem }}
@@ -251,6 +265,7 @@ export default function Header() {
         onOpen={() => setOpenDrawer(true)}
         classes={{ paper: classes.drawer }}
       >
+        <div className={classes.toolbarMargin} />
         <List disablePadding>
           {routes.map((route) => (
             <ListItem
@@ -316,7 +331,7 @@ export default function Header() {
   return (
     <>
       <ElevationScroll>
-        <AppBar position="fixed">
+        <AppBar className={classes.appbar} position="fixed">
           {/* disableGutters = remove the side gaps in the toolbar edges */}
           <Toolbar disableGutters>
             <Button
