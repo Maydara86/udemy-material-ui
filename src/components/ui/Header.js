@@ -115,17 +115,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Header() {
+export default function Header({ value, setValue, selectedIndex, setSelectedIndex }) {
   const classes = useStyles()
   const theme = useTheme()
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
   const matches = useMediaQuery(theme.breakpoints.down('md'))
 
   const [openDrawer, setOpenDrawer] = useState(false)
-  const [value, setValue] = useState(0)
   const [anchorEl, setAnchorEl] = useState(null)
   const [openMenu, setOpen] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const handleMenuItemClick = (e, i) => {
     setAnchorEl(null)
@@ -192,7 +190,7 @@ export default function Header() {
           break
       }
     })
-  }, [value, menuOptions, selectedIndex, routes])
+  }, [value, menuOptions, selectedIndex, routes, setValue, setSelectedIndex])
 
   const tabs = (
     <>
