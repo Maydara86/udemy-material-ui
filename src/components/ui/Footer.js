@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import footerAdornment from '../../assets/Footer Adornment.svg'
 import Grid from '@material-ui/core/Grid'
@@ -29,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     fontSize: '0.75rem',
     fontWeight: 'bold',
+    textDecoration: 'none',
+  },
+  gridItem: {
+    margin: '3em',
   },
 }))
 
@@ -37,51 +42,65 @@ export default function Footer() {
   return (
     <footer className={classes.footer}>
       <Grid container justify="center" className={classes.mainContainer}>
-        <Grid item>
-          <Grid container position="column">
-            <Grid item className={classes.link}>
+        <Grid item className={classes.gridItem}>
+          <Grid container position="column" spacing={2}>
+            <Grid item className={classes.link} component={Link} to="/">
               Home
             </Grid>
           </Grid>
         </Grid>
 
-        <Grid item>
-          <Grid container direction="column">
-            <Grid item className={classes.link}>
-              Custom Software Development
-            </Grid>
-            <Grid item className={classes.link}>
+        <Grid item className={classes.gridItem}>
+          <Grid container direction="column" spacing={2}>
+            <Grid item className={classes.link} component={Link} to="/service">
               Services
             </Grid>
-            <Grid item className={classes.link}>
+            <Grid item className={classes.link} component={Link} to="/software">
+              Custom Software Development
+            </Grid>
+            <Grid item className={classes.link} component={Link} to="/mobileapp">
               Mobile App Development
             </Grid>
-            <Grid item className={classes.link}>
+            <Grid item className={classes.link} component={Link} to="/website">
               Website Development
             </Grid>
           </Grid>
         </Grid>
 
-        <Grid item>
-          <Grid container direction="column">
-            <Grid item className={classes.link}>
+        <Grid item className={classes.gridItem}>
+          <Grid container direction="column" spacing={2}>
+            <Grid item className={classes.link} component={Link} to="/revolution">
               The revolution
             </Grid>
-            <Grid item className={classes.link}>
+            <Grid item className={classes.link} component={Link} to="/revolution">
               Vision
             </Grid>
-            <Grid item className={classes.link}>
+            <Grid item className={classes.link} component={Link} to="/revolution">
               Technology
             </Grid>
-            <Grid item className={classes.link}>
+            <Grid item className={classes.link} component={Link} to="/revolution">
               Process
             </Grid>
           </Grid>
         </Grid>
 
-        <Grid item>
-          <Grid container direction="column">
-            <Grid item className={classes.link}>
+        <Grid item className={classes.gridItem}>
+          <Grid container direction="column" spacing={2}>
+            <Grid item className={classes.link} component={Link} to="/about">
+              About US
+            </Grid>
+            <Grid item className={classes.link} component={Link} to="/about">
+              History
+            </Grid>
+            <Grid item className={classes.link} component={Link} to="/about">
+              Team
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item className={classes.gridItem}>
+          <Grid container direction="column" spacing={2}>
+            <Grid item className={classes.link} component={Link} to="/contact">
               Contact US
             </Grid>
           </Grid>
