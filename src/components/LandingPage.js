@@ -10,6 +10,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import animationData from '../animations/landinganimation/data'
 import ButtonArrow from './ui/ButtonArrow'
 import customSoftwareIcon from '../assets/Custom Software Icon.svg'
+import mobileAppIcon from '../assets/mobileIcon.svg'
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -130,7 +131,7 @@ export default function LandingPage() {
         </Grid>
       </Grid>
       <Grid item>
-        {/*____Service Block____*/}
+        {/*____Custom Software Block____*/}
         <Grid
           container
           className={classes.serviceContainer}
@@ -162,6 +163,37 @@ export default function LandingPage() {
               alt="custom software icon"
               src={customSoftwareIcon}
             />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*____Mobile App Block____*/}
+        <Grid
+          container
+          className={classes.serviceContainer}
+          justify={matchesSM ? 'center' : 'flex-end'}
+        >
+          <Grid
+            item
+            style={{
+              textAlign: matchesSM ? 'center' : undefined,
+            }}
+          >
+            <Typography variant="h4">Mobile App Development</Typography>
+            <Typography variant="subtitle1" className={classes.subtitle}>
+              Extend Functionality. Extend Access. Extend Engagement.
+            </Typography>
+            <Typography variant="subtitle1">
+              Integrate your web experience or create a standalone app
+              {matchesSM ? null : <br />} with either mobile platform.
+            </Typography>
+            <Button variant="outlined" className={classes.learnButton}>
+              <span style={{ marginRight: 10 }}>Learn More</span>
+              <ButtonArrow height={10} width={10} fill={theme.palette.common.blue} />
+            </Button>
+          </Grid>
+          <Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
+            <img className={classes.icon} alt="mobile phone icon" src={mobileAppIcon} />
           </Grid>
         </Grid>
       </Grid>
