@@ -6,12 +6,15 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
 
 import animationData from '../animations/landinganimation/data'
 import ButtonArrow from './ui/ButtonArrow'
 import customSoftwareIcon from '../assets/Custom Software Icon.svg'
 import mobileAppIcon from '../assets/mobileIcon.svg'
 import websiteIcon from '../assets/websiteIcon.svg'
+import revolutionBackground from '../assets/repeatingBackground.svg'
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -83,6 +86,20 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: 25,
     },
+  },
+  revolutionBackground: {
+    backgroundImage: `url(${revolutionBackground})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    height: '100%',
+    width: '100%',
+  },
+  revolutionCard: {
+    position: 'absolute',
+    boxShadow: theme.shadows[10],
+    borderRadius: 15,
+    padding: '10em',
   },
 }))
 
@@ -227,6 +244,34 @@ export default function LandingPage() {
           <Grid item>
             <img className={classes.icon} alt="website icon" src={websiteIcon} />
           </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid container alignItems="center" justify="center" style={{ height: '100em' }}>
+          <Card className={classes.revolutionCard}>
+            <CardContent>
+              <Grid container direction="column">
+                <Grid item style={{ textAlign: 'center' }}>
+                  <Typography variant="h3">The Revolution</Typography>
+                </Grid>
+                <Grid item style={{ textAlign: 'center' }}>
+                  <Typography variant="subtitle1">
+                    Visionairy insights coupled with cutting-edge technology is a recipe
+                    for revolution.
+                  </Typography>
+                  <Button variant="outlined" className={classes.learnButton}>
+                    <span style={{ marginRight: 10 }}>Learn More</span>
+                    <ButtonArrow
+                      height={10}
+                      width={10}
+                      fill={theme.palette.common.blue}
+                    />
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+          <div className={classes.revolutionBackground}></div>
         </Grid>
       </Grid>
     </Grid>
