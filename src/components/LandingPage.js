@@ -100,6 +100,11 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[10],
     borderRadius: 15,
     padding: '10em',
+    [theme.breakpoints.down('sm')]: {
+      borderRadius: 0,
+      padding: '8em 8em',
+      width: '100%',
+    },
   },
 }))
 
@@ -247,12 +252,19 @@ export default function LandingPage() {
         </Grid>
       </Grid>
       <Grid item>
-        <Grid container alignItems="center" justify="center" style={{ height: '100em' }}>
+        <Grid
+          container
+          alignItems="center"
+          justify="center"
+          style={{ height: '100em', marginTop: '12em' }}
+        >
           <Card className={classes.revolutionCard}>
             <CardContent>
               <Grid container direction="column">
                 <Grid item style={{ textAlign: 'center' }}>
-                  <Typography variant="h3">The Revolution</Typography>
+                  <Typography variant="h3" gutterBottom>
+                    The Revolution
+                  </Typography>
                 </Grid>
                 <Grid item style={{ textAlign: 'center' }}>
                   <Typography variant="subtitle1">
