@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import ButtonArrow from './ButtonArrow'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import background from '../../assets/background.jpg'
 import mobileBackground from '../../assets/mobileBackground.jpg'
@@ -20,10 +21,12 @@ const useStyle = makeStyles((theme) => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
     height: '60em',
     width: '100%',
     [theme.breakpoints.down('md')]: {
       backgroundImage: `url(${mobileBackground})`,
+      backgroundAttachment: 'inherit',
     },
   },
   estimateButton: {
@@ -34,21 +37,33 @@ const useStyle = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.orange,
     fontSize: '1.5em',
     marginRight: '5em',
+    marginLeft: '2em',
+    [theme.breakpoints.down('sm')]: {
+      margin: '1em 0 0',
+    },
   },
 }))
 
 export default function CallToAction() {
   const classes = useStyle()
   const theme = useTheme()
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Grid
       container
       alignItems="center"
       className={classes.background}
-      justify="space-between"
+      justify={matchesSM ? 'center' : 'space-between'}
+      direction={matchesSM ? 'column' : 'row'}
     >
-      <Grid item style={{ marginLeft: '5em' }}>
+      <Grid
+        item
+        style={{
+          marginLeft: matchesSM ? 0 : '5em',
+          textAlign: matchesSM ? 'center' : 'inherit',
+        }}
+      >
         <Grid container direction="column">
           <Typography variant="h2">
             Simple Software.
@@ -58,7 +73,7 @@ export default function CallToAction() {
           <Typography variant="subtitle2" style={{ fontSize: '1.5em' }}>
             Take advantage of the 21st Centery.
           </Typography>
-          <Grid container item>
+          <Grid container item justify={matchesSM ? 'center' : undefined}>
             <Button variant="outlined" className={classes.learnButton}>
               <span style={{ marginRight: 5 }}>Learn More</span>
               <ButtonArrow height={10} width={10} fill={theme.palette.common.blue} />
